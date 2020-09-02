@@ -1,10 +1,16 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './App.css';
 import Todo from './Todo';
 
-function Todolist() {
-  const [todos, setTodos] = useState([]);
+function TodolistStorage() {
+  // 4. Hente lokallagring, ellers starte med en tom liste.
+  const [todos, setTodos] = useState(JSON.parse(localStorage.getItem('todolist')) || []);
   const [text, setText] = useState('');
+
+  // Ved endringer på todolista, oppdater også lokallagring. 
+  useEffect(() => {
+    localStorage.setItem('todolist', JSON.stringify(todos));
+  }, [todos]);
 
   function handleTextChange(e) {
     const inputText = e.target.value;
@@ -40,4 +46,4 @@ function Todolist() {
   );
 }
 
-export default Todolist;
+export default TodolistStorage;
