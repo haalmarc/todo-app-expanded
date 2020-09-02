@@ -5,7 +5,7 @@ function Todo(props) {
 
   return (
     <div>
-      <p>{props.text}</p>
+      <span>{props.text}<button onClick={() => props.onClick(props.id)}>X</button></span>
     </div>
   );
 }
